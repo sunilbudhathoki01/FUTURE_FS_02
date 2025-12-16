@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
+import authRoute from "./routes/auth/auth-route.js";
 dotenv.config();
 
 const app = express();
@@ -37,3 +38,6 @@ const connectDb = async () => {
 };
 
 connectDb();
+
+// Routings
+app.use("/api/auth", authRoute);
