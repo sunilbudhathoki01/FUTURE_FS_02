@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoute from "./routes/auth/auth-route.js";
+import adminProductRouter from "./routes/admin/productsRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -41,3 +42,4 @@ connectDb();
 
 // Routings
 app.use("/api/auth", authRoute);
+app.use("/api/admin/products", adminProductRouter);
