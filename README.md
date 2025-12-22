@@ -1,32 +1,69 @@
-# MERN E-Commerce Application
+MERN E-Commerce Application
 
-This is a full-stack MERN e-commerce application with authentication and role-based access control.
+This is a full-stack MERN e-commerce application with authentication, role-based access control, and a shopping experience with products, filters, cart, and reviews.
 
-## Tech Stack
+Tech Stack
 
-- Frontend: React, Redux Toolkit, Tailwind CSS
-- Backend: Node.js, Express.js
-- Database: MongoDB
-- Authentication: JWT, Cookies
+Frontend: React, Redux Toolkit, Tailwind CSS, Shadcn UI components
 
-## ✅ Completed Features
+Backend: Node.js, Express.js
 
-- User registration and login
-- Authentication using Redux Toolkit async thunks
-- Role-based access control (Admin / User)
-- Protected routes using React Router
-- Backend authentication APIs with JWT
+Database: MongoDB
 
-## 🚧 In Progress
+Authentication: JWT, Cookies
 
-- Persist authentication on page refresh using JWT token
-- Auto-login using auth check API
+✅ Completed Features
 
-## 📂 Project Structure
+User registration and login
 
-- `client/` → Frontend (UI, Redux, routing)
-- `server/` → Backend (APIs, auth, DB, JWT)
+Authentication using Redux Toolkit async thunks
 
-## 👨‍💻 Author
+Role-based access control (Admin / User)
+
+Protected routes using React Router
+
+Backend authentication APIs with JWT
+
+Shopping features:
+
+Product listing and product tiles
+
+Product filters and search
+
+Product details with reviews and ratings
+
+Cart functionality with cart wrapper and item components
+
+🚧 In Progress
+
+Persist authentication on page refresh using JWT token
+
+Auto-login using auth check API
+
+Admin panel features for product and order management
+
+📂 Project Structure
+
+client/ → Frontend
+
+components/ → React components (shopping, UI, common)
+
+store/ → Redux slices for auth, products, cart, reviews
+
+server/ → Backend
+
+controllers/ → Admin and shop controllers
+
+routes/ → API routes
+
+models/ → MongoDB schemas
+
+📌 Notes
+
+UI uses Shadcn components like Avatar, Dialog, DropdownMenu, Separator, Badge, etc.
+
+Backend APIs follow RESTful conventions.
+
+👨‍💻 Author
 
 Sunil Budhathoki
