@@ -6,38 +6,46 @@ const initialState = {
   isLoading: true,
   user: null,
 };
+
 // for registration
 export const registerUser = createAsyncThunk(
   "/auth/register",
-  async (FormData) => {
+
+  async (formData) => {
     const response = await axios.post(
       "http://localhost:4000/api/auth/register",
-      FormData,
+      formData,
       {
         withCredentials: true,
       }
     );
+
     return response.data;
   }
 );
 // for login
-export const loginUser = createAsyncThunk("/auth/login", async (FormData) => {
-  const response = await axios.post(
-    "http://localhost:4000/api/auth/login",
-    FormData,
-    {
-      withCredentials: true,
-    }
-  );
-  return response.data;
-});
-// logout
+export const loginUser = createAsyncThunk(
+  "/auth/login",
+
+  async (formData) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/auth/login",
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  }
+);
+// for logout
 export const logoutUser = createAsyncThunk(
   "/auth/logout",
 
   async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/logout",
+      "http://localhost:4000/api/auth/logout",
       {},
       {
         withCredentials: true,
@@ -48,20 +56,25 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-// authentication
-export const checkAuth = createAsyncThunk("/auth/check-auth", async () => {
-  const response = await axios.get(
-    "http://localhost:4000/api/auth/check-auth",
-    {
-      withCredentials: true,
-      headers: {
-        "Cache-control": "no-store,no-cache,must-revalidate,proxy-revalidate",
-        Expires: "0",
-      },
-    }
-  );
-  return response.data;
-});
+export const checkAuth = createAsyncThunk(
+  "/auth/checkauth",
+
+  async () => {
+    const response = await axios.get(
+      "http://localhost:4000/api/auth/check-auth",
+      {
+        withCredentials: true,
+        headers: {
+          "Cache-Control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+        },
+      }
+    );
+
+    return response.data;
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -70,7 +83,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // for registration
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -84,12 +96,12 @@ const authSlice = createSlice({
         state.user = null;
         state.isAuthenticated = false;
       })
-      // for login
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log(action);
+
         state.isLoading = false;
         state.user = action.payload.success ? action.payload.user : null;
         state.isAuthenticated = action.payload.success;
@@ -99,8 +111,6 @@ const authSlice = createSlice({
         state.user = null;
         state.isAuthenticated = false;
       })
-
-      // for check-auth
       .addCase(checkAuth.pending, (state) => {
         state.isLoading = true;
       })
@@ -110,6 +120,11 @@ const authSlice = createSlice({
         state.isAuthenticated = action.payload.success;
       })
       .addCase(checkAuth.rejected, (state, action) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
